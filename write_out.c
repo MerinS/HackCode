@@ -31,7 +31,7 @@ int write_out(char *s_name, void *data, size_t size) {
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(8000);
 
-    if(inet_pton(AF_INET, s_name, &server_addr.sin_addr) <= 0) {
+    if(inet_pton(PF_INET, s_name, &server_addr.sin_addr) <= 0) {
         printf("%s\n", "Connection error");
         return -1;
     }
