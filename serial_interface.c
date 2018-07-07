@@ -5,22 +5,8 @@
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
+#include <FallDetector.h>
 
-void set_mincount(int fd, int mcount)
-{
-    struct termios tty;
-
-    if (tcgetattr(fd, &tty) < 0) {
-        printf("Error tcgetattr: %s\n", strerror(errno));
-        return;
-    }
-
-    tty.c_cc[VMIN] = mcount ? 1 : 0;
-    tty.c_cc[VTIME] = 5;        /* half second timer */
-
-    if (tcsetattr(fd, TCSANOW, &tty) < 0)
-        printf("Error tcsetattr: %s\n", strerror(errno));
-}
 
 
 int main()
@@ -40,13 +26,17 @@ int main()
         char buf[80];
         int rdlen;
         char* pos;
+        float read[3];
         rdlen = read(fd, buf, sizeof(buf) - 1);
         if (rdlen > 0) {
             char* pch  = strtok_r(&buf,",", &pos);
+            int i = 0;
             while (pch!= NULL){
-                printf("%f\n", atof(pch));
+                read[i] = atof(pch);
                 pch = strtok_r(NULL, ",", &pos);
+                ++i;
             }
+            run_fall_detector(read[0],read[1],read[2]);
         } else if (rdlen < 0) {
             printf("Error from read: %d: %s\n", rdlen, strerror(errno));
         }
