@@ -23,13 +23,14 @@ int main()
 
 
     while (1){
-        char buf[80];
+        char * buf;
+        buf  = (char *)malloc(80*sizeof(char));
         int rdlen;
         char* pos;
         float read_list[3];
         rdlen = read(fd, buf, sizeof(buf) - 1);
         if (rdlen > 0) {
-            char* pch  = strtok_r(&buf,",", &pos);
+            char* pch  = strtok_r(buf,",", &pos);
             int i = 0;
             while (pch!= NULL){
                 read_list[i] = atof(pch);
