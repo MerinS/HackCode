@@ -40,7 +40,6 @@ int run_fall_detector(double x, double y, double z) {
             // IDLE to IMPACT transition
             if (accel_magnitude > IDLE_TO_IMPACT_ACCEL_THRESHOLD) {
                 state = IMPACT;
-                return 1;
             }
             break;
 
