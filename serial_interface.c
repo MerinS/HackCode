@@ -37,15 +37,14 @@ int main()
 
 
     while (1){
-        char * buf;
-        buf = (char *)malloc(sizeof(char)*80);
+        char buf[80];
         int rdlen;
         char* pos;
         rdlen = read(fd, buf, sizeof(buf) - 1);
         if (rdlen > 0) {
-            char* pch  = strtok_r(buf,",", &pos);
+            char* pch  = strtok_r(&buf,",", &pos);
             while (pch!= NULL){
-                printf("%s\n", atof(buf));
+                printf("%f\n", atof(pch));
                 pch = strtok_r(NULL, ",", &pos);
             }
         } else if (rdlen < 0) {
