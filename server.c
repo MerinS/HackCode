@@ -49,6 +49,7 @@ int main(int argc, char const *argv[]) {
         read(sock, data, size);
         write(fd, data, size);
         close(fd);
+        free(data);
     }
     return 0;
 }
