@@ -46,13 +46,13 @@ int main(int argc, char **argv)
                 pch = strtok_r(NULL, ",", &pos);
                 ++i;
             }
-            //int return_val = run_fall_detector(read_list[0],read_list[1],read_list[2]);
-            fprintf(f, "%f\n", val);
-            // if(return_val == 1){
-            //     //Detected a fall
-            //     printf("Fall Detected\n");
-            //     write_out(argv[1], read_list, sizeof(read_list));
-            // }
+            int return_val = run_fall_detector(val);
+            //fprintf(f, "%f\n", val);
+            if(return_val == 1){
+                //Detected a fall
+                printf("Fall Detected\n");
+                write_out(argv[1], val);
+            }
             printf("%s\n", buf);
         } else if (rdlen < 0) {
             printf("Error from read: %d: %s\n", rdlen, strerror(errno));

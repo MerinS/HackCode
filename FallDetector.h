@@ -9,6 +9,6 @@
 //                       (IMPACT_TO_ACTIVITY_THRESHOLD_FRACTION * IMPACT_CYCLES)
 #define ACTIVITY_THRESHOLD_CYCLES      85
 
-int run_fall_detector(double x, double y, double z);
+int run_fall_detector(double accel_magnitude);
 
 #endif // FALLDETECTOR_H
