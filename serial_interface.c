@@ -51,7 +51,7 @@ int main(int argc, char **argv)
             if(return_val == 1){
                 //Detected a fall
                 printf("Fall Detected\n");
-                write_out(argv[1], val);
+                write_out(argv[1], &val, sizeof(val));
             }
             printf("%s\n", buf);
         } else if (rdlen < 0) {
