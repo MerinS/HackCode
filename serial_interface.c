@@ -36,22 +36,20 @@ int main()
     }
 
 
-    do {
+    while (1){
         char * buf;
         buf = (char *)malloc(sizeof(char)*80);
         int rdlen;
-
+        char* pos;
         rdlen = read(fd, buf, sizeof(buf) - 1);
         if (rdlen > 0) {
-            unsigned char   *p;
-            char* pos;
-            char* string_arg = strtok_r(string_arg,",", &buf);
-            while (string_arg != NULL){
-                printf("%f\n", atof(string_arg));
-                string_arg  = strtok_r(NULL, ",",&pos);
+            char* pch  = strtok_r(buf,",", &pos);
+            while (pch!= NULL){
+                printf("%s\n", atof(buf));
+                pch = strtok_r(NULL, ",", &pos);
             }
         } else if (rdlen < 0) {
             printf("Error from read: %d: %s\n", rdlen, strerror(errno));
         }
-    } while (1);
+    } 
 }
