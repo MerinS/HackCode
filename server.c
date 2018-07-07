@@ -49,7 +49,7 @@ int main(int argc, char const *argv[]) {
         void *data = malloc(size);
         read(sock, data, size);
         char buf[100];
-        sprintf(buf, "Reading: %f Timestamp: %lu\n", *((float *)data), time(0));
+        sprintf(buf, "Reading: %f\tTimestamp: %lu\n", *((float *)data), time(0));
         write(fd, buf, strlen(buf));
         close(fd);
         free(data);
