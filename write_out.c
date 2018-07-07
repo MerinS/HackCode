@@ -47,7 +47,7 @@ int write_out(char *s_name, void *data, size_t size) {
     return 0;
 }
 
-int main(int argc, char **argv) {
+/*int main(int argc, char **argv) {
     if (argc != 2) {
         printf("Usage: %s <server hostname>\n", argv[0]);
         return -1;
@@ -55,3 +55,4 @@ int main(int argc, char **argv) {
     char out[] = "halp\n";
     return write_out(argv[1], out, sizeof(out));
 }
+*/

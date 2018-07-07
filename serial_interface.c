@@ -1,16 +1,21 @@
 #include <errno.h>
-#include <fcntl.h> 
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
 #include "FallDetector.h"
+#include "write_out.h"
 
 
-
-int main()
+int main(int argc, char **argv)
 {
+    if (argc != 2) {
+        printf("Usage: %s <Server IP>\n", argv[1]);
+        return -1;
+    }
+    
     char *portname = "/dev/tty96B0";
     int fd;
     int wlen;
@@ -41,9 +46,10 @@ int main()
             if(return_val == 1){
                 //Detected a fall
                 printf("Fall Detected\n");
+                write_out(argv[1], read_list, sizeof(read_list));
             }
         } else if (rdlen < 0) {
             printf("Error from read: %d: %s\n", rdlen, strerror(errno));
         }
-    } 
+    }
 }
