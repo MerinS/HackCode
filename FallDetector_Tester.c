@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
     size_t len;
     int length;
     
-    int t;
+    float t;
     float x, y, z;
     
     int line_num = 0;
@@ -23,21 +23,19 @@ int main(int argc, char *argv[]) {
     f = fopen(argv[1], "r");
     
     while ((length = getline(&line, &len, f)) != -1) {
-        if ((line[0] == '#') || (length == 1)) {
-            // Skip the line
+        if (line[0] == '@') {
+            break;
         }
-        else {
-            while (fscanf(f, "%d, %f, %f, %f", &t, &x, &y, &z) != EOF) {
-                //printf("%f, %f, %f\n", x, y, z);
-                line_num++;
-                
-                fall_detected = run_fall_detector(x, y, z);
-                
-                if (fall_detected) {
-                    //printf("Line %d\n", line_num);
-                    falls_detected++;
-                }
-            }
+    }
+    while (fscanf(f, "%f, %f, %f, %f", &t, &x, &y, &z) != EOF) {
+        //printf("%f, %f, %f\n", x, y, z);
+        line_num++;
+        
+        fall_detected = run_fall_detector(x, y, z);
+        
+        if (fall_detected) {
+            //printf("Line %d\n", line_num);
+            falls_detected++;
         }
     }
     
