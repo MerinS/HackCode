@@ -26,10 +26,9 @@ int main(int argc, char **argv)
         return -1;
     }
 
-
+    char * buf;
+    buf  = (char *)malloc(80*sizeof(char));
     while (1){
-        char * buf;
-        buf  = (char *)malloc(80*sizeof(char));
         int rdlen;
         char* pos;
         float read_list[3];
