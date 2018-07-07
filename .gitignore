@@ -1,4 +1,7 @@
 evil-server
 write-out-test
 FallDetectorTest
+f_track
+*.o
 *.log
+*.gch
