@@ -8,18 +8,17 @@
 #include <arpa/inet.h>
 #include <string.h>
 #include <netdb.h>
+#include <time.h>
 
 int write_out(char *s_name, void *data, size_t size) {
     int fd;
-    int ret;
     int sock;
     struct sockaddr_in server_addr;
 
     fd  = open("status.log", O_CREAT | O_WRONLY | O_APPEND, S_IRUSR | S_IWUSR);
-    ret = write(fd, data, size);
-    if (ret != size) {
-        return -ret;
-    }
+    char buf[100];
+    sprintf(buf, "Reading: %f\tTimestamp: %lu\n", *((float *)data), time(0));
+    write(fd, buf, strlen(buf));
     close(fd);
 
     if((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -46,13 +45,3 @@ int write_out(char *s_name, void *data, size_t size) {
     write(sock, data, size);
     return 0;
 }
-
-/*int main(int argc, char **argv) {
-    if (argc != 2) {
-        printf("Usage: %s <server hostname>\n", argv[0]);
-        return -1;
-    }
-    char out[] = "halp\n";
-    return write_out(argv[1], out, sizeof(out));
-}
-*/

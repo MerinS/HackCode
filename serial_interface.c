@@ -47,7 +47,7 @@ int main(int argc, char **argv)
                 ++i;
             }
             int return_val = run_fall_detector(val);
-            //fprintf(f, "%f\n", val);
+            fprintf(f, "%f\n", val);
             if(return_val == 1){
                 //Detected a fall
                 printf("Fall Detected\n");
