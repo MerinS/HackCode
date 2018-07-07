@@ -48,8 +48,8 @@ int main(int argc, char const *argv[]) {
         void *data = malloc(size);
         read(sock, data, size);
         char buf[20];
-        sprintf(buf, "%f\n", *(float *)data);
-        write(fd, buf, sizeof(buf));
+        sprintf(buf, "%f\n", *((float *)data));
+        write(fd, buf, strlen(buf));
         close(fd);
         free(data);
     }
