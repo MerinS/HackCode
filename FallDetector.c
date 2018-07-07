@@ -23,7 +23,7 @@ typedef enum {
  * Returns:
  *   1 if a fall is detected, 0 otherwise
  */
-int run_fall_detector(double x, double y, double z) {
+int run_fall_detector(double accel_magnitude) {
     static state_t state                       = IDLE;
     static int     cycles_above_threshold      = 0;
 
@@ -33,7 +33,7 @@ int run_fall_detector(double x, double y, double z) {
     static int     cycle_buffer_idx            = 0;
 
     // Compute magnitude of acceleration
-    double accel_magnitude = sqrt(x*x + y*y + z*z);
+    //double accel_magnitude = sqrt(x*x + y*y + z*z);
 
     switch (state) {
         case IDLE:
