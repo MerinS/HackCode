@@ -9,6 +9,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <string.h>
+#include <time.h>
 
 int main(int argc, char const *argv[]) {
     int listener = 0;
@@ -47,8 +48,8 @@ int main(int argc, char const *argv[]) {
         read(sock, &size, sizeof(size));
         void *data = malloc(size);
         read(sock, data, size);
-        char buf[20];
-        sprintf(buf, "%f\n", *((float *)data));
+        char buf[100];
+        sprintf(buf, "Reading: %f Timestamp: %lu\n", *((float *)data), time(0));
         write(fd, buf, strlen(buf));
         close(fd);
         free(data);
