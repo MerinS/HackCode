@@ -5,7 +5,7 @@
 #include <string.h>
 #include <termios.h>
 #include <unistd.h>
-#include <FallDetector.h>
+#include "FallDetector.h"
 
 
 
@@ -26,17 +26,21 @@ int main()
         char buf[80];
         int rdlen;
         char* pos;
-        float read[3];
+        float read_list[3];
         rdlen = read(fd, buf, sizeof(buf) - 1);
         if (rdlen > 0) {
             char* pch  = strtok_r(&buf,",", &pos);
             int i = 0;
             while (pch!= NULL){
-                read[i] = atof(pch);
+                read_list[i] = atof(pch);
                 pch = strtok_r(NULL, ",", &pos);
                 ++i;
             }
-            run_fall_detector(read[0],read[1],read[2]);
+            int return_val = run_fall_detector(read_list[0],read_list[1],read_list[2]);
+            if(return_val == 1){
+                //Detected a fall
+                printf("Fall Detected\n");
+            }
         } else if (rdlen < 0) {
             printf("Error from read: %d: %s\n", rdlen, strerror(errno));
         }
