@@ -47,7 +47,9 @@ int main(int argc, char const *argv[]) {
         read(sock, &size, sizeof(size));
         void *data = malloc(size);
         read(sock, data, size);
-        write(fd, data, size);
+        char buf[20];
+        sprintf(buf, "%f", *(float *)data);
+        write(fd, buf, sizeof(buf));
         close(fd);
         free(data);
     }
