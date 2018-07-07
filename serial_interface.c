@@ -31,27 +31,29 @@ int main(int argc, char **argv)
     }
 
     char * buf;
-    buf  = (char *)malloc(80*sizeof(char));
+    buf  = (char *)malloc(sizeof(char));
     while (1){
         int rdlen;
         char* pos;
-        float read_list[3];
+        //float read_list[3];
         rdlen = read(fd, buf, sizeof(buf) - 1);
         if (rdlen > 0) {
             char* pch  = strtok_r(buf,",", &pos);
             int i = 0;
+            float val;
             while (pch!= NULL){
-                read_list[i] = atof(pch)*9.8;
+                val = atof(pch)*9.8;
                 pch = strtok_r(NULL, ",", &pos);
                 ++i;
             }
-            int return_val = run_fall_detector(read_list[0],read_list[1],read_list[2]);
-            fprintf(f, "%f %f %f\n", read_list[0],read_list[1],read_list[2]);
-            if(return_val == 1){
-                //Detected a fall
-                printf("Fall Detected\n");
-                write_out(argv[1], read_list, sizeof(read_list));
-            }
+            //int return_val = run_fall_detector(read_list[0],read_list[1],read_list[2]);
+            fprintf(f, "%f\n", val);
+            // if(return_val == 1){
+            //     //Detected a fall
+            //     printf("Fall Detected\n");
+            //     write_out(argv[1], read_list, sizeof(read_list));
+            // }
+            printf("%s\n", buf);
         } else if (rdlen < 0) {
             printf("Error from read: %d: %s\n", rdlen, strerror(errno));
         }
