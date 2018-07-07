@@ -37,7 +37,7 @@ int main(int argc, char **argv)
             char* pch  = strtok_r(buf,",", &pos);
             int i = 0;
             while (pch!= NULL){
-                read_list[i] = atof(pch);
+                read_list[i] = atof(pch)*9.8;
                 pch = strtok_r(NULL, ",", &pos);
                 ++i;
             }
