@@ -49,7 +49,7 @@ int main()
             unsigned char   *p;
             printf("Read %d:", rdlen);
             for (p = buf; rdlen-- > 0; p++)
-                printf(" 0x%x", *p);
+                printf(" %c", *p);
             printf("\n");
 #endif
         } else if (rdlen < 0) {
