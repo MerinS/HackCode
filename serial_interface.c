@@ -7,10 +7,14 @@
 #include <unistd.h>
 #include "FallDetector.h"
 #include "write_out.h"
+#include <time.h>
 
+
+FILE *f;
 
 int main(int argc, char **argv)
 {
+    f = fopen("datalog", "w");
     if (argc != 2) {
         printf("Usage: %s <Server IP>\n", argv[0]);
         return -1;
@@ -42,6 +46,7 @@ int main(int argc, char **argv)
                 ++i;
             }
             int return_val = run_fall_detector(read_list[0],read_list[1],read_list[2]);
+            fprintf(f, "%f %f %f\n", read_list[0],read_list[1],read_list[2]);
             if(return_val == 1){
                 //Detected a fall
                 printf("Fall Detected\n");
@@ -51,4 +56,5 @@ int main(int argc, char **argv)
             printf("Error from read: %d: %s\n", rdlen, strerror(errno));
         }
     }
+    fclose(f);
 }
