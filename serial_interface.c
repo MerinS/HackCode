@@ -53,7 +53,7 @@ int main(int argc, char **argv)
                 printf("Fall Detected\n");
                 write_out(argv[1], &val, sizeof(val));
             }
-            printf("%s\n", buf);
+            //printf("%s\n", buf);
         } else if (rdlen < 0) {
             printf("Error from read: %d: %s\n", rdlen, strerror(errno));
         }
