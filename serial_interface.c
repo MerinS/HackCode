@@ -31,12 +31,12 @@ int main(int argc, char **argv)
     }
 
     char * buf;
-    buf  = (char *)malloc(sizeof(char));
+    buf  = (char *)malloc(sizeof(char)*20);
     while (1){
         int rdlen;
         char* pos;
         //float read_list[3];
-        rdlen = read(fd, buf, sizeof(buf) - 1);
+        rdlen = read(fd, buf, 20);
         if (rdlen > 0) {
             char* pch  = strtok_r(buf,",", &pos);
             int i = 0;
@@ -51,7 +51,7 @@ int main(int argc, char **argv)
             if(return_val == 1){
                 //Detected a fall
                 printf("Fall Detected\n");
-                write_out(argv[1], &val, sizeof(val));
+                write_out(argv[1], pch, 20);
             }
             //printf("%s\n", buf);
         } else if (rdlen < 0) {
