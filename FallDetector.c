@@ -24,7 +24,6 @@ typedef enum {
  *   1 if a fall is detected, 0 otherwise
  */
 int run_fall_detector(double x, double y, double z) {
-    return 1;
     static state_t state                       = IDLE;
     static int     cycles_above_threshold      = 0;
 
@@ -41,6 +40,7 @@ int run_fall_detector(double x, double y, double z) {
             // IDLE to IMPACT transition
             if (accel_magnitude > IDLE_TO_IMPACT_ACCEL_THRESHOLD) {
                 state = IMPACT;
+                return 1;
             }
             break;
 
